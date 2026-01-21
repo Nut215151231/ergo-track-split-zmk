@@ -11,6 +11,7 @@
     ergo_track_split_layout: ergo_track_split_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
+        transform = <&default_transform>;
         
         keys  // w   h    x    y     r    rx   ry
             = <&key_physical_attrs 100 100    0    0    0     0    0>  // ROW0 COL6 (LEFT)
