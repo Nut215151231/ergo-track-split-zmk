@@ -121,11 +121,15 @@
         
         // Auto-activate mouse layer when trackball moves
         layers = <3>;
-        timeout-ms = <1000>;
         
-        // Adjust these based on your trackball orientation
-        // xy-swap;
-        // x-invert;
-        // y-invert;
+        // Bindings for auto-toggle mouse layer
+        bindings = <&ib_tog_layer 3>;
+    };
+    
+    // Auto-toggle mouse layer behavior
+    ib_tog_layer: ib_tog_layer {
+        compatible = "zmk,input-behavior-tog-layer";
+        #binding-cells = <1>;
+        time-to-live-ms = <1000>;
     };
 };
