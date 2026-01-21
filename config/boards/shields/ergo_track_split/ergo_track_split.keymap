@@ -1,0 +1,112 @@
+/*
+ * Copyright (c) 2024
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+    behaviors {
+        // Input listener for auto-mouse layer activation
+        input_listener: input_listener {
+            compatible = "zmk,input-behavior-listener";
+            device = <&trackball>;
+            
+            // Auto-activate mouse layer when trackball is used
+            layers = <3>;  // Layer 3 is mouse layer
+            timeout-ms = <1000>;
+            
+            // Mouse movement bindings
+            xy-swap;
+            x-invert;
+            y-invert;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Layer 0: Default (Base)
+        default_layer {
+            bindings = <
+            // LEFT SIDE
+            &none   &kp ESC  &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &kp MINUS &kp EQUAL
+            &kp ESC &kp TAB  &kp Q    &kp W    &kp E    &kp R    &kp T        &kp Y    &kp U    &kp I    &kp O    &kp P     &kp LBKT  &kp RBKT
+            &kp LALT &kp CAPS &kp A   &kp S    &kp D    &kp F    &kp G        &kp H    &kp J    &kp K    &kp L    &kp SEMI  &kp APOS  &kp RET
+                    &kp LSHFT &kp Z   &kp X    &kp C    &kp V    &kp B        &kp N    &kp M    &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
+            &mo 2   &kp LCTRL &kp LGUI &mo 1   &kp SPACE &none   &none        &kp SPACE &kp RET &none    &none    &mo 4     &kp DEL   &none
+            &kp RET &kp LEFT  &kp DOWN &kp UP  &kp RIGHT &mo 3   &mo 3        &none    &none    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &kp RET
+            >;
+            
+            sensor-bindings = <
+                &inc_dec_kp C_VOL_UP C_VOL_DN     // Left Encoder 1: Volume
+                &inc_dec_kp PG_UP PG_DN           // Left Encoder 2: Page Up/Down
+                &inc_dec_kp C_BRI_UP C_BRI_DN     // Right Encoder 1: Brightness
+            >;
+        };
+
+        // Layer 1: Lower
+        lower_layer {
+            bindings = <
+            &trans &kp F1   &kp F2   &kp F3   &kp F4   &kp F5   &kp F6       &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+            
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
+        };
+
+        // Layer 2: Raise
+        raise_layer {
+            bindings = <
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+            
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
+        };
+
+        // Layer 3: Mouse/Trackball layer (auto-activated by trackball movement)
+        mouse_layer {
+            bindings = <
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans    &trans    &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans    &trans    &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans    &trans    &trans
+                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans    &trans
+            &trans &trans  &trans   &trans   &mkp LCLK &mkp RCLK &mkp MCLK  &mkp LCLK &mkp RCLK &trans &trans   &trans    &trans    &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans    &trans    &trans
+            >;
+            
+            sensor-bindings = <
+                &inc_dec_kp C_VOL_UP C_VOL_DN     // Scroll when in mouse layer
+                &inc_dec_kp UP DOWN
+                &inc_dec_kp LEFT RIGHT
+            >;
+        };
+
+        // Layer 4: Function/Settings
+        function_layer {
+            bindings = <
+            &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans    &trans &trans &trans &trans &trans &trans &studio_unlock
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+            
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
+        };
+    };
+};
