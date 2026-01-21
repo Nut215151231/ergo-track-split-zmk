@@ -1,0 +1,5 @@
+config SHIELD_ERGO_TRACK_SPLIT_LEFT
+    def_bool $(shields_list_contains,ergo_track_split_left)
+
+config SHIELD_ERGO_TRACK_SPLIT_RIGHT
+    def_bool $(shields_list_contains,ergo_track_split_right)
