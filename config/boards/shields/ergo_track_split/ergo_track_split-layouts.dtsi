@@ -109,7 +109,3 @@
     };
 };
 
-// Assign physical layout to matrix transform
-&default_transform {
-    physical-layout = <&ergo_track_split_layout>;
-};
