@@ -112,24 +112,3 @@
         // sleep3-timeout-ms = <10000>;
     };
 };
-
-// Input processor for trackball behavior
-/ {
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-behavior-listener";
-        device = <&trackball>;
-        
-        // Auto-activate mouse layer when trackball moves
-        layers = <3>;
-        
-        // Bindings for auto-toggle mouse layer
-        bindings = <&ib_tog_layer 3>;
-    };
-    
-    // Auto-toggle mouse layer behavior
-    ib_tog_layer: ib_tog_layer {
-        compatible = "zmk,input-behavior-tog-layer";
-        #binding-cells = <1>;
-        time-to-live-ms = <1000>;
-    };
-};
