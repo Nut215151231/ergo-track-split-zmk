@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2024
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "ergo_track_split.dtsi"
+
+/ {
+    chosen {
+        zmk,battery = &vbatt;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+        wakeup-source;
+
+        // LEFT SIDE COLUMNS
+        col-gpios
+            = <&gpio1 13 GPIO_ACTIVE_HIGH>  // COL0
+            , <&gpio1 11 GPIO_ACTIVE_HIGH>  // COL1
+            , <&gpio0 10 GPIO_ACTIVE_HIGH>  // COL2
+            , <&gpio0 9 GPIO_ACTIVE_HIGH>   // COL3
+            , <&gpio1 6 GPIO_ACTIVE_HIGH>   // COL4
+            , <&gpio1 4 GPIO_ACTIVE_HIGH>   // COL5
+            , <&gpio0 11 GPIO_ACTIVE_HIGH>  // COL6
+            ;
+
+        // LEFT SIDE ROWS
+        row-gpios
+            = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW0
+            , <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW1
+            , <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2
+            , <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3
+            , <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW4
+            , <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW5
+            ;
+    };
+
+    // Left side encoders
+    left_encoder_1: encoder_left_1 {
+        compatible = "alps,ec11";
+        a-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // ENC1.A
+        b-gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;   // ENC1.B
+        steps = <80>;
+        status = "okay";
+    };
+
+    left_encoder_2: encoder_left_2 {
+        compatible = "alps,ec11";
+        a-gpios = <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // ENC2.A
+        b-gpios = <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // ENC2.B
+        steps = <80>;
+        status = "okay";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder_1 &left_encoder_2>;
+        triggers-per-rotation = <20>;
+    };
+};
