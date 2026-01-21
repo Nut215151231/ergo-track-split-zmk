@@ -10,23 +10,6 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
-    behaviors {
-        // Input listener for auto-mouse layer activation
-        input_listener: input_listener {
-            compatible = "zmk,input-behavior-listener";
-            device = <&trackball>;
-            
-            // Auto-activate mouse layer when trackball is used
-            layers = <3>;  // Layer 3 is mouse layer
-            timeout-ms = <1000>;
-            
-            // Mouse movement bindings
-            xy-swap;
-            x-invert;
-            y-invert;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
