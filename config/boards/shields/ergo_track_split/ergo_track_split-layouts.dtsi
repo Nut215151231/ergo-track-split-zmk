@@ -12,7 +12,6 @@
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
-        keys-len = <82>;
         
         keys  // w   h    x    y     r    rx   ry
             = <&key_physical_attrs 100 100    0    0    0     0    0>  // ROW0 COL6 (LEFT)
@@ -110,4 +109,3 @@
             ;
     };
 };
-
