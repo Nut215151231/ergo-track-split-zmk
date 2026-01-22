@@ -5,9 +5,25 @@
 
 #include "ergo_track_split.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors.dtsi>
+
+#define MOUSE 3
 
 &default_transform {
     col-offset = <7>;
+};
+
+// Input listener for auto mouse layer activation
+/ {
+    // Create trackball listener
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        
+        // Auto-activate mouse layer (Layer 3) for 2 seconds after movement
+        // Then automatically return to base layer
+        input-processors = <&zip_temp_layer MOUSE 2000>;
+    };
 };
 
 / {
