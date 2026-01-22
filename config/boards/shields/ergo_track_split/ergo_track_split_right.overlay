@@ -10,26 +10,6 @@
     col-offset = <7>;
 };
 
-// Input listener for auto mouse layer
-/ {
-    zmk_input_listener: zmk_input_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        
-        // Input processors
-        input-processors = <&imp_tog_layer MOUSE>;
-    };
-    
-    // Auto-toggle mouse layer on trackball movement
-    imp_tog_layer: imp_tog_layer {
-        compatible = "zmk,input-processor-toggle-layer";
-        #input-processor-cells = <1>;
-        time-to-live-ms = <2000>;  // Stay in mouse layer for 2 seconds after last movement
-        require-prior-idle-ms = <500>;  // Prevent activation during typing
-        track-input-devices = <&trackball>;
-    };
-};
-
 / {
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
