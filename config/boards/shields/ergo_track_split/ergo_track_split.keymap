@@ -16,29 +16,6 @@
 #define FUNC 4
 
 / {
-    behaviors {
-        // Auto Mouse Layer behavior with smart exit
-        // 非マウスキーでレイヤーを抜ける
-        aml_exit: auto_mouse_layer_exit {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&tog MOUSE>;
-        };
-        
-        // Mouse click with layer persistence
-        // クリック時はレイヤーに留まる
-        mclick: mouse_click_persistent {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mkp>, <&mkp>;
-        };
-    };
-
     // Conditional layers for auto-activation
     conditional_layers {
         compatible = "zmk,conditional-layers";
@@ -104,21 +81,27 @@
         };
 
         // Layer 3: Mouse Layer (Auto-activated by trackball)
+        // Non-mouse keys toggle off the layer for instant exit
         mouse_layer {
             label = "Mouse";
             bindings = <
-            // 非マウスキーを押したら即座にレイヤーを抜ける
+            // Row 0: Numbers exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
+            // Row 1: Letter keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
+            // Row 2: Letter keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-                       &kp LSHFT  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &kp RSHFT
-            &tog MOUSE &kp LCTRL  &kp LGUI   &tog MOUSE &mkp LCLK  &mkp RCLK  &mkp MCLK     &mkp LCLK  &mkp RCLK  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
+            // Row 3: Shift stays, other letter keys exit
+            &kp LSHFT  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &kp RSHFT
+            // Row 4: Modifiers and mouse buttons
+            &tog MOUSE &kp LCTRL  &kp LGUI   &tog MOUSE &mkp LCLK  &mkp RCLK  &mkp MCLK     &mkp LCLK  &mkp RCLK  &mkp MCLK  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
+            // Row 5: Navigation exits except manual toggle
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &trans     &trans        &trans     &trans     &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
             >;
             
             sensor-bindings = <
                 &inc_dec_kp UP DOWN              // Scroll vertical
-                &inc_dec_kp LEFT RIGHT           // Scroll horizontal
+                &inc_dec_kp LEFT RIGHT           // Scroll horizontal  
                 &inc_dec_kp C_VOL_UP C_VOL_DN    // Volume in mouse layer
             >;
         };
@@ -127,12 +110,17 @@
         function_layer {
             label = "Function";
             bindings = <
-            // BT Profile selection & controls
+            // Row 0: BT Profile selection & controls
             &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG    &trans &trans &trans &trans &trans &trans &studio_unlock
+            // Row 1: Output selection
             &out OUT_BLE  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
+            // Row 2: 
             &out OUT_USB  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-                          &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans
+            // Row 3:
+            &trans        &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans
+            // Row 4:
             &trans        &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
+            // Row 5: BT Profile navigation
             &trans        &bt BT_PRV   &trans       &trans       &bt BT_NXT   &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
             >;
             
