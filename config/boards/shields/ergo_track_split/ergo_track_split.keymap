@@ -65,8 +65,8 @@
     /* =====================
      * Input Processor Definition
      * ===================== */
-    // ここでプロセッサを定義することで、undefined node label 'zip_xy_scaler' を防ぎます
     zip_xy_scaler: zip_xy_scaler {
+        /* この compatible 行が不足していたためエラーが出ていました */
         compatible = "zmk,input-processor-scalars";
         #input-processor-cells = <2>;
     };
