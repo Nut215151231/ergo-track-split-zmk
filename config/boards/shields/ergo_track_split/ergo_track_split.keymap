@@ -32,10 +32,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Base
-        base_layer {
-            label = "Base";
-            bindings = <
+<
             // Row 0 - 14 keys
             &bt BT_CLR &kp ESC   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &kp MINUS &kp EQUAL
             // Row 1 - 14 keys
@@ -59,7 +56,6 @@
 
         // Layer 1: Lower (Numbers, Symbols)
         lower_layer {
-            label = "Lower";
             bindings = <
             // Row 0 - 14 keys
             &trans     &kp F1    &kp F2   &kp F3   &kp F4   &kp F5   &kp F6       &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &trans
@@ -80,7 +76,6 @@
 
         // Layer 2: Raise (Navigation, Arrows)
         raise_layer {
-            label = "Raise";
             bindings = <
             // Row 0 - 14 keys
             &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
@@ -101,7 +96,6 @@
 
         // Layer 3: Mouse Layer
         mouse_layer {
-            label = "Mouse";
             bindings = <
             // Row 0 - 14 keys - Number keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
@@ -126,7 +120,6 @@
 
         // Layer 4: Function/Settings (BLE controls)
         function_layer {
-            label = "Function";
             bindings = <
             // Row 0 - 14 keys - BT Profile selection & controls
             &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG    &trans &trans &trans &trans &trans &trans &bootloader
