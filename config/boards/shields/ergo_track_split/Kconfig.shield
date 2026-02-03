@@ -6,25 +6,3 @@ config SHIELD_ERGO_TRACK_SPLIT_LEFT
 
 config SHIELD_ERGO_TRACK_SPLIT_RIGHT
 	def_bool $(shields_list_contains,ergo_track_split_right)
-
-# Enable PMW3610 driver when right shield is selected
-if SHIELD_ERGO_TRACK_SPLIT_RIGHT
-
-config PMW3610
-	default y
-
-config SPI
-	default y
-
-endif # SHIELD_ERGO_TRACK_SPLIT_RIGHT
-
-# Enable PMW3610 driver when right shield is selected
-if SHIELD_ERGO_TRACK_SPLIT_RIGHT
-
-config PMW3610
-	default y
-
-config SPI
-	default y
-
-endif # SHIELD_ERGO_TRACK_SPLIT_RIGHT
