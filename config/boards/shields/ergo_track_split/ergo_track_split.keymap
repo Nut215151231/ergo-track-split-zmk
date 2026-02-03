@@ -127,4 +127,10 @@ func_led_on: func_led_on {
             >;
         };
     };
+    /* トラックボールの入力をマウスカーソルの移動に変換する設定 */
+        &trackball_listener {
+            status = "okay";
+    /* トラックボールの動きをXY軸のマウス移動（Relative Reports）に変換 */
+          input-processors = <&zip_xy_scaler 1 1>; 
+    ;  
 };
