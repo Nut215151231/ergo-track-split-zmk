@@ -14,15 +14,14 @@
     col-offset = <7>;
 };
 
-// Input listener for trackball - with xy transform
+// Input listener for trackball
 / {
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // XY transform for mouse movement
-        // Format: scale_x, scale_y
-        input-processors = <&input_transform_xy 1 1>;
+        // Use xy-transform with identity scaling (no transformation)
+        // This processes the raw input and sends it as mouse movement
     };
 };
 
