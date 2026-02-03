@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2024
  * SPDX-License-Identifier: MIT
+ * 
+ * FIXED VERSION - Simplified for debugging
  */
 
 #include <behaviors.dtsi>
@@ -34,13 +36,18 @@
         base_layer {
             label = "Base";
             bindings = <
-            // LEFT SIDE
-            &none     &kp ESC  &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &kp MINUS &kp EQUAL
-            &kp ESC   &kp TAB  &kp Q    &kp W    &kp E    &kp R    &kp T        &kp Y    &kp U    &kp I    &kp O    &kp P     &kp LBKT  &kp RBKT
-            &kp LALT  &kp CAPS &kp A    &kp S    &kp D    &kp F    &kp G        &kp H    &kp J    &kp K    &kp L    &kp SEMI  &kp APOS  &kp RET
-                      &kp LSHFT &kp Z   &kp X    &kp C    &kp V    &kp B        &kp N    &kp M    &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
-            &mo RAISE &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none  &none       &kp SPACE &kp RET &none    &none    &mo FUNC  &kp DEL   &none
-            &kp RET   &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &tog MOUSE &tog MOUSE &none  &none    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &kp RET
+            // Row 0 - 14 keys
+            &bt BT_CLR &kp ESC   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &kp MINUS &kp EQUAL
+            // Row 1 - 14 keys
+            &kp ESC    &kp TAB   &kp Q    &kp W    &kp E    &kp R    &kp T        &kp Y    &kp U    &kp I    &kp O    &kp P     &kp LBKT  &kp RBKT
+            // Row 2 - 14 keys
+            &kp LALT   &kp CAPS  &kp A    &kp S    &kp D    &kp F    &kp G        &kp H    &kp J    &kp K    &kp L    &kp SEMI  &kp APOS  &kp RET
+            // Row 3 - 12 keys
+                       &kp LSHFT &kp Z    &kp X    &kp C    &kp V    &kp B        &kp N    &kp M    &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
+            // Row 4 - 14 keys
+            &mo RAISE  &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none   &none       &kp SPACE &kp RET &none    &none    &mo FUNC  &kp DEL   &none
+            // Row 5 - 14 keys
+            &kp RET    &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &tog MOUSE &tog MOUSE &none   &none    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &kp RET
             >;
             
             sensor-bindings = <
@@ -54,12 +61,18 @@
         lower_layer {
             label = "Lower";
             bindings = <
-            &trans &kp F1   &kp F2   &kp F3   &kp F4   &kp F5   &kp F6       &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &trans
-            &trans &kp GRAVE &kp N1  &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &trans   &trans
-            &trans &trans  &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans   &trans
-                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 0 - 14 keys
+            &trans     &kp F1    &kp F2   &kp F3   &kp F4   &kp F5   &kp F6       &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &trans
+            // Row 1 - 14 keys
+            &trans     &kp GRAVE &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &trans   &trans
+            // Row 2 - 14 keys
+            &trans     &trans    &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans   &trans
+            // Row 3 - 12 keys
+                       &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 4 - 14 keys
+            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 5 - 14 keys
+            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
             >;
             
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
@@ -69,33 +82,38 @@
         raise_layer {
             label = "Raise";
             bindings = <
-            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &kp HOME &kp UP   &kp END  &kp PG_UP &trans      &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans     &trans   &trans   &trans   &trans   &trans   &trans   &trans
-                   &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            &trans &trans  &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 0 - 14 keys
+            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 1 - 14 keys
+            &trans     &trans    &kp HOME &kp UP   &kp END  &kp PG_UP &trans      &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 2 - 14 keys
+            &trans     &trans    &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans     &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 3 - 12 keys
+                       &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 4 - 14 keys
+            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            // Row 5 - 14 keys
+            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
             >;
             
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
-        // Layer 3: Mouse Layer (Auto-activated by trackball)
-        // Non-mouse keys toggle off the layer for instant exit
+        // Layer 3: Mouse Layer
         mouse_layer {
             label = "Mouse";
             bindings = <
-            // Row 0: Numbers exit mouse layer
+            // Row 0 - 14 keys - Number keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 1: Letter keys exit mouse layer
+            // Row 1 - 14 keys - Letter keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 2: Letter keys exit mouse layer
+            // Row 2 - 14 keys - Letter keys exit mouse layer
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 3: Shift stays, other letter keys exit
-            &kp LSHFT  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &kp RSHFT
-            // Row 4: Modifiers and mouse buttons
+            // Row 3 - 12 keys - Shift stays, other letter keys exit
+                       &kp LSHFT  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &kp RSHFT
+            // Row 4 - 14 keys - Modifiers and mouse buttons
             &tog MOUSE &kp LCTRL  &kp LGUI   &tog MOUSE &mkp LCLK  &mkp RCLK  &mkp MCLK     &mkp LCLK  &mkp RCLK  &mkp MCLK  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 5: Navigation exits except manual toggle
+            // Row 5 - 14 keys - Navigation exits except manual toggle
             &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &trans     &trans        &trans     &trans     &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
             >;
             
@@ -110,17 +128,17 @@
         function_layer {
             label = "Function";
             bindings = <
-            // Row 0: BT Profile selection & controls
-            &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG    &trans &trans &trans &trans &trans &trans &studio_unlock
-            // Row 1: Output selection
+            // Row 0 - 14 keys - BT Profile selection & controls
+            &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG    &trans &trans &trans &trans &trans &trans &bootloader
+            // Row 1 - 14 keys - Output selection
             &out OUT_BLE  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 2: 
+            // Row 2 - 14 keys
             &out OUT_USB  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 3:
-            &trans        &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans
-            // Row 4:
+            // Row 3 - 12 keys
+                          &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans
+            // Row 4 - 14 keys
             &trans        &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 5: BT Profile navigation
+            // Row 5 - 14 keys - BT Profile navigation
             &trans        &bt BT_PRV   &trans       &trans       &bt BT_NXT   &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
             >;
             
