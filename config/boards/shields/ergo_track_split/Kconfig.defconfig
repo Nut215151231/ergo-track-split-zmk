@@ -8,6 +8,19 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
+if SHIELD_ERGO_TRACK_SPLIT_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Ergo Track Split"
+
+# Enable PMW3610 trackball driver for right side
+config PMW3610
+    default y
+    select SPI
+    select INPUT
+
+endif
+
 if SHIELD_ERGO_TRACK_SPLIT_LEFT || SHIELD_ERGO_TRACK_SPLIT_RIGHT
 
 config ZMK_SPLIT
