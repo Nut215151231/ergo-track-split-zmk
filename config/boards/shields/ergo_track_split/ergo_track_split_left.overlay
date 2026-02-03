@@ -71,4 +71,7 @@
             label = "FUNC_LED_LEFT";
         };
     };
+
+    trackball: trackball { };
+    trackball_listener: trackball_listener { };
 };

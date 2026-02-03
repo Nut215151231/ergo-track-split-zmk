@@ -24,7 +24,6 @@
     func_led_on: func_led_on {
         compatible = "zmk,behavior-output";
         label = "FUNC_LED_ON";
-        /* 左右のオーバーレイで共通定義したラベル名 'func_led' を参照 */
         output = <&func_led>; 
         value = <1>;
     };
@@ -63,6 +62,15 @@
         };
     };
 
+    /* =====================
+     * Input Processor Definition
+     * ===================== */
+    // ここでプロセッサを定義することで、undefined node label 'zip_xy_scaler' を防ぎます
+    zip_xy_scaler: zip_xy_scaler {
+        compatible = "zmk,input-processor-scalars";
+        #input-processor-cells = <2>;
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -76,8 +84,6 @@
             &mo RAISE &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none    &none &kp SPACE &kp RET &none &none &kp DEL &none
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE       &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
-            
-            /* トラックボールは input-listener で動かすため、ここには記述しません */
         };
 
         /* ========= LOWER ========= */
@@ -130,15 +136,15 @@
     };
 };
 
-/* --- 以下の設定はルートノード { } の外側に記述します --- */
+/* --- 以下、ラベル参照による設定 --- */
 
 &trackball_listener {
     status = "okay";
-    /* トラックボールの動きをマウス移動に変換。1 1 は倍率（感度）です */
+    device = <&trackball>;
+    // 1 1 は感度の倍率です。動かしてみて調整してください。
     input-processors = <&zip_xy_scaler 1 1>;
 };
 
-/* 念のためデバイス自体も有効化 */
 &trackball {
     status = "okay";
 };
