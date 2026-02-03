@@ -29,8 +29,6 @@
             ;
 
         // LEFT SIDE ROWS
-        // FIXED: ROW4 and ROW5 were duplicating ROW2 and ROW3
-        // Please verify the actual GPIO pins used for ROW4 and ROW5 on your hardware
         row-gpios
             = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW0
             , <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // ROW1
@@ -62,5 +60,14 @@
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder_1 &left_encoder_2>;
         triggers-per-rotation = <20>;
+    };
+
+    // Battery/Status indicator LED
+    leds {
+        compatible = "gpio-leds";
+        status_led: led_0 {
+            gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+            label = "Status LED";
+        };
     };
 };

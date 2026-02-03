@@ -14,14 +14,15 @@
     col-offset = <7>;
 };
 
-// SIMPLIFIED: Input listener without auto-activation for initial testing
+// Input listener for trackball - with xy transform
 / {
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Simple passthrough - no layer auto-activation for now
-        // This allows us to test if the trackball works at all
+        // XY transform for mouse movement
+        // Format: scale_x, scale_y
+        input-processors = <&input_transform_xy 1 1>;
     };
 };
 
