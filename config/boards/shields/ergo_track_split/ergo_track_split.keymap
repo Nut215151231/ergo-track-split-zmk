@@ -142,7 +142,7 @@
     status = "okay";
     device = <&trackball>;
     // 1 1 は感度の倍率です。動かしてみて調整してください。
-    input-processors = <&zip_xy_scaler 1 1>;
+    input-processors = <>;
 };
 
 &trackball {
