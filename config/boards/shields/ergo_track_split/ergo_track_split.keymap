@@ -20,10 +20,10 @@
      * LED control behaviors
      * ===================== */
 
-func_led_on: func_led_on {
+    func_led_on: func_led_on {
         compatible = "zmk,behavior-output";
         label = "FUNC_LED_ON";
-        /* 左右それぞれのオーバーレイで定義したラベル名 'func_led' を指定 */
+        /* 左右のオーバーレイで共通定義したラベル名 'func_led' を参照 */
         output = <&func_led>; 
         value = <1>;
     };
@@ -69,49 +69,49 @@ func_led_on: func_led_on {
         base_layer {
             bindings = <
             &bt BT_CLR_ALL &kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &kp EQUAL
-            &kp ESC &kp TAB &kp Q &kp W &kp E &kp R &kp T             &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
-            &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G           &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &kp RET
-                     &kp LSHFT &kp Z &kp X &kp C &kp V &kp B          &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
+            &kp ESC &kp TAB &kp Q &kp W &kp E &kp R &kp T               &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
+            &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G             &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &kp RET
+                     &kp LSHFT &kp Z &kp X &kp C &kp V &kp B           &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
             &mo RAISE &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none    &none &kp SPACE &kp RET &none &none &kp DEL &none
-            &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE     &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
+            &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE       &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
-
-
+            
+            /* トラックボールは input-listener で動かすため、ここには記述しません */
         };
 
         /* ========= LOWER ========= */
         lower_layer {
             bindings = <
-            &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6         &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &trans
-            &trans &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5      &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans &trans
+            &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6          &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &trans
+            &trans &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5       &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans &trans
             &trans &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans &trans
-                     &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+                     &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
             >;
         };
 
         /* ========= RAISE ========= */
         raise_layer {
             bindings = <
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
             &trans &trans &kp HOME &kp UP &kp END &kp PG_UP &trans   &trans &trans &trans &trans &trans &trans &trans
             &trans &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans &trans &trans &trans &trans &trans &trans &trans
-                     &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+                     &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
             >;
         };
 
         /* ========= MOUSE ========= */
         mouse_layer {
             bindings = <
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
                      &kp LSHFT &trans &trans &trans &trans &trans   &trans &trans &trans &trans &kp RSHFT
             &trans &kp LCTRL &kp LGUI &trans &mkp LCLK &mkp RCLK &mkp MCLK &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans         &trans &trans &trans &trans &trans &trans &trans
             >;
         };
 
@@ -127,10 +127,17 @@ func_led_on: func_led_on {
             >;
         };
     };
-    /* トラックボールの入力をマウスカーソルの移動に変換する設定 */
-        &trackball_listener {
-            status = "okay";
-    /* トラックボールの動きをXY軸のマウス移動（Relative Reports）に変換 */
-          input-processors = <&zip_xy_scaler 1 1>; 
-    ;  
+};
+
+/* --- 以下の設定はルートノード { } の外側に記述します --- */
+
+&trackball_listener {
+    status = "okay";
+    /* トラックボールの動きをマウス移動に変換。1 1 は倍率（感度）です */
+    input-processors = <&zip_xy_scaler 1 1>;
+};
+
+/* 念のためデバイス自体も有効化 */
+&trackball {
+    status = "okay";
 };
