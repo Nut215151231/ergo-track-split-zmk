@@ -65,9 +65,10 @@
     // Battery/Status indicator LED
     leds {
         compatible = "gpio-leds";
-        status_led: led_0 {
-            gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
-            label = "Status LED";
+
+        func_led: led_func {
+            gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>; /* P1.00 */
+            label = "FUNC_LED_LEFT";
         };
     };
 };
