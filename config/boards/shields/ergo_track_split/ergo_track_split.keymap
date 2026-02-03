@@ -74,6 +74,10 @@
             &mo RAISE &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none    &none &kp SPACE &kp RET &none &none &kp DEL &none
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE     &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
+
+                sensor-bindings = <
+                   &trackball_mouse
+               >;
         };
 
         /* ========= LOWER ========= */
