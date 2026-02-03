@@ -82,7 +82,7 @@
             &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G             &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &mkp LCLK
                      &kp LSHFT &kp Z &kp X &kp C &kp V &kp B           &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
             &mo RAISE &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none    &none &kp SPACE &kp RET &none &none &kp DEL &none
-            &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE       &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
+            &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE       &none &none &kp LEFT &kp DOWN &kp LEFT &kp RIGHT &kp RET
             >;
         };
 
@@ -141,9 +141,12 @@
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
-    // 1 1 は感度の倍率です。動かしてみて調整してください。
+    /* xy信号をOSのマウス移動信号に変換するプロセッサを明示 */
+    input-processors = <&zip_xy_scaler 1 1>;
 };
 
 &trackball {
     status = "okay";
+    /* 通信が不安定な場合、周波数を下げると安定することがあります */
+    spi-max-frequency = <500000>; 
 };
