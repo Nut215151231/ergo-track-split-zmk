@@ -1,8 +1,5 @@
 /*
- * Copyright (c) 2024
- * SPDX-License-Identifier: MIT
- * 
- * FIXED VERSION - Simplified for debugging
+ * FIXED VERSION - Layer switching corrected
  */
 
 #include <behaviors.dtsi>
@@ -18,11 +15,9 @@
 #define FUNC 4
 
 / {
-    // Conditional layers for auto-activation
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        
-        // When LOWER + RAISE are active, activate FUNC layer
+
         func_layer {
             if-layers = <LOWER RAISE>;
             then-layer = <FUNC>;
@@ -32,112 +27,71 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Base
+        /* ================= BASE ================= */
         base_layer {
             bindings = <
-            // Row 0 - 14 keys
             &bt BT_CLR &kp ESC   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &kp MINUS &kp EQUAL
-            // Row 1 - 14 keys
             &kp ESC    &kp TAB   &kp Q    &kp W    &kp E    &kp R    &kp T        &kp Y    &kp U    &kp I    &kp O    &kp P     &kp LBKT  &kp RBKT
-            // Row 2 - 14 keys
             &kp LALT   &kp CAPS  &kp A    &kp S    &kp D    &kp F    &kp G        &kp H    &kp J    &kp K    &kp L    &kp SEMI  &kp APOS  &kp RET
-            // Row 3 - 12 keys
                        &kp LSHFT &kp Z    &kp X    &kp C    &kp V    &kp B        &kp N    &kp M    &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
-            // Row 4 - 14 keys
-            &mo RAISE  &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none   &none       &kp SPACE &kp RET &none    &none    &mo FUNC  &kp DEL   &none
-            // Row 5 - 14 keys
-            &kp RET    &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &tog MOUSE &tog MOUSE &none   &none    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &kp RET
+            &mo RAISE  &kp LCTRL &kp LGUI &mo LOWER &kp SPACE &none   &none       &kp SPACE &kp RET &none    &none
+            &kp DEL    &none     // ★FIX: &mo FUNC を削除
+            &kp RET    &kp LEFT  &kp DOWN &kp UP   &kp RIGHT &tog MOUSE &none     &none   &none    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &kp RET
             >;
-            
+
             sensor-bindings = <
-                &inc_dec_kp C_VOL_UP C_VOL_DN     // Left Encoder 1: Volume
-                &inc_dec_kp PG_UP PG_DN           // Left Encoder 2: Page Up/Down
-                &inc_dec_kp C_BRI_UP C_BRI_DN     // Right Encoder 1: Brightness
+                &inc_dec_kp C_VOL_UP C_VOL_DN
+                &inc_dec_kp PG_UP PG_DN
+                &inc_dec_kp C_BRI_UP C_BRI_DN
             >;
         };
 
-        // Layer 1: Lower (Numbers, Symbols)
+        /* ================= LOWER ================= */
         lower_layer {
             bindings = <
-            // Row 0 - 14 keys
-            &trans     &kp F1    &kp F2   &kp F3   &kp F4   &kp F5   &kp F6       &kp F7   &kp F8   &kp F9   &kp F10  &kp F11  &kp F12  &trans
-            // Row 1 - 14 keys
-            &trans     &kp GRAVE &kp N1   &kp N2   &kp N3   &kp N4   &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &trans   &trans
-            // Row 2 - 14 keys
-            &trans     &trans    &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans   &trans
-            // Row 3 - 12 keys
-                       &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 4 - 14 keys
-            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 5 - 14 keys
-            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6   &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &trans
+            &trans &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans &trans
+            &trans &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans &trans
+                       &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
             >;
-            
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
-        // Layer 2: Raise (Navigation, Arrows)
+        /* ================= RAISE ================= */
         raise_layer {
             bindings = <
-            // Row 0 - 14 keys
-            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 1 - 14 keys
-            &trans     &trans    &kp HOME &kp UP   &kp END  &kp PG_UP &trans      &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 2 - 14 keys
-            &trans     &trans    &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans     &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 3 - 12 keys
-                       &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 4 - 14 keys
-            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
-            // Row 5 - 14 keys
-            &trans     &trans    &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &kp HOME &kp UP &kp END &kp PG_UP &trans &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans &trans &trans &trans &trans &trans &trans &trans
+                       &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
             >;
-            
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
-        // Layer 3: Mouse Layer
+        /* ================= MOUSE ================= */
         mouse_layer {
             bindings = <
-            // Row 0 - 14 keys - Number keys exit mouse layer
-            &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 1 - 14 keys - Letter keys exit mouse layer
-            &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 2 - 14 keys - Letter keys exit mouse layer
-            &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 3 - 12 keys - Shift stays, other letter keys exit
-                       &kp LSHFT  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE    &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &kp RSHFT
-            // Row 4 - 14 keys - Modifiers and mouse buttons
-            &tog MOUSE &kp LCTRL  &kp LGUI   &tog MOUSE &mkp LCLK  &mkp RCLK  &mkp MCLK     &mkp LCLK  &mkp RCLK  &mkp MCLK  &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            // Row 5 - 14 keys - Navigation exits except manual toggle
-            &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &trans     &trans        &trans     &trans     &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE &tog MOUSE
-            >;
-            
-            sensor-bindings = <
-                &inc_dec_kp UP DOWN              // Scroll vertical
-                &inc_dec_kp LEFT RIGHT           // Scroll horizontal  
-                &inc_dec_kp C_VOL_UP C_VOL_DN    // Volume in mouse layer
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+                       &kp LSHFT &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp RSHFT
+            &trans &kp LCTRL &kp LGUI &trans &mkp LCLK &mkp RCLK &mkp MCLK &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
             >;
         };
 
-        // Layer 4: Function/Settings (BLE controls)
+        /* ================= FUNC ================= */
         function_layer {
             bindings = <
-            // Row 0 - 14 keys - BT Profile selection & controls
-            &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG    &trans &trans &trans &trans &trans &trans &bootloader
-            // Row 1 - 14 keys - Output selection
-            &out OUT_BLE  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 2 - 14 keys
-            &out OUT_USB  &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 3 - 12 keys
-                          &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans
-            // Row 4 - 14 keys
-            &trans        &trans       &trans       &trans       &trans       &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 5 - 14 keys - BT Profile navigation
-            &trans        &bt BT_PRV   &trans       &trans       &bt BT_NXT   &trans       &trans          &trans &trans &trans &trans &trans &trans &trans
+            &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG &trans &trans &trans &trans &trans &trans &bootloader
+            &out OUT_BLE &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            &out OUT_USB &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                       &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            &trans &bt BT_PRV &trans &trans &bt BT_NXT &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
-            
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
     };
 };
