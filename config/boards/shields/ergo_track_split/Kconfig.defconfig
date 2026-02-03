@@ -37,7 +37,7 @@ config GPIO
 # Optional features (safe defaults)
 #
 config ZMK_USB
-    default y
+    default n
 
 config ZMK_BLE
     default y
