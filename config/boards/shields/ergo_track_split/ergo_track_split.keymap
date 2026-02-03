@@ -20,17 +20,18 @@
      * LED control behaviors
      * ===================== */
 
-    func_led_on: func_led_on {
+func_led_on: func_led_on {
         compatible = "zmk,behavior-output";
         label = "FUNC_LED_ON";
-        output = <&func_led_left &func_led_right>;
+        /* 左右それぞれのオーバーレイで定義したラベル名 'func_led' を指定 */
+        output = <&func_led>; 
         value = <1>;
     };
 
     func_led_off: func_led_off {
         compatible = "zmk,behavior-output";
         label = "FUNC_LED_OFF";
-        output = <&func_led_left &func_led_right>;
+        output = <&func_led>; 
         value = <0>;
     };
 
@@ -75,9 +76,7 @@
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &tog MOUSE     &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
 
-                sensor-bindings = <
-                   &trackball
-               >;
+
         };
 
         /* ========= LOWER ========= */
