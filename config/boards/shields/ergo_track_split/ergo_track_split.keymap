@@ -29,13 +29,6 @@
         codes = <INPUT_REL_X INPUT_REL_Y>;
     };
 
-    /* --- リスナー（物理デバイスを指定せず、全ての入力を拾う設定） --- */
-    /* リンクエラーを避けるため、device = <&pmw3610>; を削除します */
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&pinctrl>; // ダミーとして全Nodeに存在するpinctrl等を指定するか、device行を消す
-        input-processors = <&zip_xy_scaler 1 1>;
-    };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
