@@ -26,15 +26,13 @@
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
         type = <INPUT_REL_XY>;
-        codes = <INPUT_REL_X INPUT_REL_Y>; /* 必須項目なので必ず入れる */
-        /* multiplier と divisor は一旦書かない。
-           必要な場合は input-processors = <&zip_xy_scaler 2 1>; のように引数で渡す仕様です */
+        codes = <INPUT_REL_X INPUT_REL_Y>;
     };
 
-trackball_listener {
+    /* 物理デバイスを指定せず、入力イベントを拾う設定 */
+    trackball_listener {
         compatible = "zmk,input-listener";
-        /* &trackball ではなく、より確実なラベル名 &pmw3610 を試します */
-        device = <&pmw3610>; 
+        device = <&pinctrl>; /* 暫定的に有効なノードを指定するか、空にする */
         input-processors = <&zip_xy_scaler 1 1>;
     };
 
