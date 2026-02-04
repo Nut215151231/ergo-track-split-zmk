@@ -26,15 +26,15 @@
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
         type = <INPUT_REL_XY>;
-        codes = <INPUT_REL_X INPUT_REL_Y>; /* これが必須項目でした */
-        multiplier = <1>;
-        divisor = <1>;
+        /* codes = <INPUT_REL_X INPUT_REL_Y>; */ /* もしエラーが出るならここをコメントアウト */
+        /* multiplier / divisor を削除し、動作を input-processors に任せる */
     };
 
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>;
+        /* ここで数値を直接渡す: 第一引数が multiplier、第二引数が divisor になることが多いです */
+        input-processors = <&zip_xy_scaler 1 1>; 
     };
 
     conditional_layers {
