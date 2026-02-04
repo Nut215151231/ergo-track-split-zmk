@@ -4,7 +4,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
-// #include "ergo_track_split-layouts.dtsi"
+#include "ergo_track_split-layouts.dtsi"
 
 / {
     model = "Ergo Track Split";
