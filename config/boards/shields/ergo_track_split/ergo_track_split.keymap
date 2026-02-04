@@ -37,7 +37,6 @@ trackball_listener {
         device = <&pmw3610>; 
         input-processors = <&zip_xy_scaler 1 1>;
     };
-    };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
