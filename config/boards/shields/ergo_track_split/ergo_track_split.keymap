@@ -9,6 +9,11 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/input_transform.h>
 
+/* --- ここが重要: エラー回避のために手動で定義 --- */
+#ifndef INPUT_REL_XY
+#define INPUT_REL_XY 0x02
+#endif
+
 #define BASE  0
 #define LOWER 1
 #define RAISE 2
@@ -16,7 +21,7 @@
 #define FUNC  4
 
 / {
-    /* --- トラックボールの感度・挙動設定 --- */
+    /* --- トラックボールの感度設定 --- */
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
@@ -31,7 +36,6 @@
         input-processors = <&zip_xy_scaler 1 1>;
     };
 
-    /* --- レイヤー切り替え設定 --- */
     conditional_layers {
         compatible = "zmk,conditional-layers";
         func_layer {
