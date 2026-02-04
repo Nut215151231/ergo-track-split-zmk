@@ -13,12 +13,9 @@
 };
 
 / {
-    /* 修正ポイント: input-processors = <>; と明示して Binding エラーを回避 */
-trackball_listener: trackball_listener {
+    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* input-processors = <>;  ←この行を消すか、以下のようにコメントアウトしてください */
-        /* input-processors = <&zip_xy_scaler 1 1>; */
     };
 
     kscan0: kscan {
@@ -106,7 +103,6 @@ trackball_listener: trackball_listener {
         zephyr,axis-y = <INPUT_REL_Y>;
         
         res-cpi = <600>;
-        /* 動きが逆なら here で invert を調整 */
         invert-x;
         invert-y;
     };
