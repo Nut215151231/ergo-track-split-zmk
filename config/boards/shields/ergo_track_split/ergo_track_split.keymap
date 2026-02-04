@@ -38,9 +38,9 @@
         base_layer {
             bindings = <
             // Row 0: 右上に&to MOUSE
-            &bt BT_CLR_ALL &kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &to MOUSE
+            &to MOUSE &kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &to MOUSE
             // Row 1
-            &kp ESC &kp TAB &kp Q &kp W &kp E &kp R &kp T               &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
+            &bt BT_CLR_ALL &kp TAB &kp Q &kp W &kp E &kp R &kp T               &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
             // Row 2
             &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G             &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &kp RET
             // Row 3 (12 elements)
@@ -92,7 +92,7 @@
         mouse_layer {
             bindings = <
             // Row 0: 左上で&to BASEに戻る
-            &to BASE &trans &trans &trans &trans &trans &trans          &trans &trans &trans &trans &trans &trans &trans
+            &to BASE &kp LCTRL &trans &trans &trans &trans &trans          &trans &trans &trans &trans &trans &trans &trans
             // Row 1
             &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
             // Row 2
