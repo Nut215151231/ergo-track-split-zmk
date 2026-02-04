@@ -21,7 +21,7 @@
 #define FUNC  4
 
 / {
-    /* --- トラックボールの感度設定 --- */
+    /* --- スケーラー（これは共通でOK） --- */
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
@@ -29,10 +29,11 @@
         codes = <INPUT_REL_X INPUT_REL_Y>;
     };
 
-    /* 物理デバイスを指定せず、入力イベントを拾う設定 */
+    /* --- リスナー（物理デバイスを指定せず、全ての入力を拾う設定） --- */
+    /* リンクエラーを避けるため、device = <&pmw3610>; を削除します */
     trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&pinctrl>; /* 暫定的に有効なノードを指定するか、空にする */
+        device = <&pinctrl>; // ダミーとして全Nodeに存在するpinctrl等を指定するか、device行を消す
         input-processors = <&zip_xy_scaler 1 1>;
     };
 
