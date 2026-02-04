@@ -31,10 +31,12 @@
            必要な場合は input-processors = <&zip_xy_scaler 2 1>; のように引数で渡す仕様です */
     };
 
-    trackball_listener {
+trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>; 
+        /* &trackball ではなく、より確実なラベル名 &pmw3610 を試します */
+        device = <&pmw3610>; 
+        input-processors = <&zip_xy_scaler 1 1>;
+    };
     };
 
     conditional_layers {
