@@ -16,16 +16,16 @@
         am_layer: am_layer {
             compatible = "zmk,behavior-auto-layer";
             #binding-cells = <1>;
-            continue-list = <0 1 2>; // LCLK, RCLK, MCLK の内部コード
+            #input-processor-cells = <1>;
+            continue-list = <0 1 2>; // LCLK, RCLK, MCLK
             timeout-ms = <1000>;
         };
     };
 
-    /* トラックボールの動きを監視して am_layer をトリガーする */
+    /* トラックボールの動きを監視してレイヤー3(MOUSE)へ切り替え */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* この zmk,input-processor-entry を使うのが最新の正攻法です */
         input-processors = <&zip_xy_scaler 1 1>, <&am_layer 3>;
     };
 
@@ -109,11 +109,11 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        
-        /* 必須項目のみを残す */
+
+        /* 必須項目 */
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
-        
+
         res-cpi = <1600>;
     };
 };
