@@ -17,7 +17,6 @@
         am_layer: am_layer {
             compatible = "zmk,behavior-auto-layer";
             #binding-cells = <1>;
-            #input-processor-cells = <1>;
             continue-list = <0 1 2>; 
             timeout-ms = <1000>; // 1秒操作がないとレイヤーを抜ける
         };
