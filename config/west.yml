@@ -12,4 +12,6 @@ manifest:
     - name: zmk-auto-layer
       remote: dxue
       revision: main
-      path: modules/zmk-auto-layer  # 明示的にパスを指定して場所を確保
+      path: modules/zmk-auto-layer
+  self:
+   path: config
