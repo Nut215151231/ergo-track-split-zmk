@@ -11,22 +11,12 @@
 };
 
 / {
-    behaviors {
-        /* 1秒で解除されるオートレイヤー設定 */
-        am_layer: am_layer {
-            compatible = "zmk,behavior-auto-layer";
-            #binding-cells = <1>;
-            #input-processor-cells = <1>;
-            continue-list = <0 1 2>; // LCLK, RCLK, MCLK
-            timeout-ms = <1000>;
-        };
-    };
-
-    /* トラックボールの動きを監視してレイヤー3(MOUSE)へ切り替え */
+    /* インプットリスナー：トラックボールの動きをPCに伝える最小構成 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>, <&am_layer 3>;
+        /* 倍率1:1（等倍）の設定 */
+        input-processors = <&zip_xy_scaler 1 1>;
     };
 
     kscan0: kscan {
@@ -110,10 +100,11 @@
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-        /* 必須項目 */
+        /* 必須の座標軸設定 */
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
 
+        /* 解像度設定。カクつく場合はここを 800-1600 で調整してください */
         res-cpi = <1600>;
     };
 };
