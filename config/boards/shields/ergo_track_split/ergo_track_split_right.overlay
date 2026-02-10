@@ -11,11 +11,25 @@
 };
 
 / {
-    /* 右手がセントラルなので、ここにリスナーを配置 */
+    /* 特殊な挙動の定義 */
+    behaviors {
+        /* 1秒操作がないとレイヤー0に戻るオートマウス設定 */
+        am_layer: am_layer {
+            compatible = "zmk,behavior-auto-layer";
+            #binding-cells = <1>;
+            continue-list = <MOUSE_BTN1 MOUSE_BTN2 MOUSE_BTN3>;
+            timeout-ms = <1000>;
+        };
+    };
+
+    /* トラックボールの入力を監視してレイヤーを切り替える */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&trackball>; 
+        device = <&trackball>;
         input-processors = <&zip_xy_scaler 1 1>;
+        
+        /* トラックボールを動かしたらレイヤー3 (MOUSE) を起動 */
+        bindings = <&am_layer 3>;
     };
 
     kscan0: kscan {
@@ -102,31 +116,6 @@
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
         
-        res-cpi = <1600>;
-     //   invert-x;
-     //   invert-y;
+        res-cpi = <1200>;
     };
-
-    / {
-    /* タイムアウト（オートレイヤー解除）の定義 */
-    behaviors {
-        auto_mouse_layer: auto_mouse_layer {
-            compatible = "zmk,behavior-auto-layer";
-            #binding-cells = <1>;
-            continue-list = <MOUSE_BTN1 MOUSE_BTN2 MOUSE_BTN3>; // マウスボタンを押している間は維持
-            timeout-ms = <1000>; // 1秒間動かさないとマウスレイヤーを抜ける
-        };
-    };
-
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>;
-        
-        /* トラックボールを動かした時の挙動 */
-        /* MOUSEレイヤー（3番）を自動で呼び出す */
-        layers = <0>; // 全レイヤーで有効
-        bindings = <&auto_mouse_layer 3>; 
-    };
-};
 };
