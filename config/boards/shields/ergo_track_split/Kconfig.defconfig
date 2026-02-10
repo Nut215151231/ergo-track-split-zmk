@@ -10,8 +10,11 @@ config PMW3610
     default y
 
 #
-# Input subsystem
+# Input subsystem (重要！)
 #
+config INPUT
+    default y
+
 config ZMK_MOUSE
     default y
 
