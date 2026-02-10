@@ -11,12 +11,25 @@
 };
 
 / {
-    /* インプットリスナー：トラックボールの動きをPCに伝える最小構成 */
+    behaviors {
+        /* オートマウスレイヤーの設定 */
+        /* マウスキー（0,1,2 = LCLK,RCLK,MCLK）を押すとタイマーをリセットし留まる */
+        am_layer: am_layer {
+            compatible = "zmk,behavior-auto-layer";
+            #binding-cells = <1>;
+            #input-processor-cells = <1>;
+            continue-list = <0 1 2>; 
+            timeout-ms = <1000>; // 1秒操作がないとレイヤーを抜ける
+        };
+    };
+
+    /* トラックボールの動きを監視して自動でレイヤー3を起動 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* 倍率1:1（等倍）の設定 */
-        input-processors = <&zip_xy_scaler 1 1>;
+        input-processors = 
+            <&zip_xy_scaler 1 1>, 
+            <&am_layer 3>; // マウスが動いたらレイヤー3へ
     };
 
     kscan0: kscan {
@@ -100,11 +113,9 @@
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-        /* 必須の座標軸設定 */
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
 
-        /* 解像度設定。カクつく場合はここを 800-1600 で調整してください */
         res-cpi = <1600>;
     };
 };
