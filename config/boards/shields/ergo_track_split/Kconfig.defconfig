@@ -46,13 +46,3 @@ config ZMK_BLE
     default y
 
 endif
-
-if SHIELD_ERGO_TRACK_SPLIT_RIGHT
-
-config ZMK_INPUT_LISTENER
-    default y
-
-config ZMK_BEHAVIOR_AUTO_LAYER
-    default y
-
-endif
