@@ -12,23 +12,20 @@
 
 / {
     behaviors {
+        /* 1秒で解除されるオートマウス設定 */
         am_layer: am_layer {
             compatible = "zmk,behavior-auto-layer";
             #binding-cells = <1>;
-            /* 数値指定でエラーを回避 */
-            continue-list = <0 1 2>; 
+            continue-list = <0 1 2>; // LCLK, RCLK, MCLK
             timeout-ms = <1000>;
         };
     };
 
-    /* トラックボールの入力を監視してレイヤーを切り替える */
+    /* bindingsを削除し、標準的な構成に戻します */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         input-processors = <&zip_xy_scaler 1 1>;
-        
-        /* トラックボールを動かしたらレイヤー3 (MOUSE) を起動 */
-        bindings = <&am_layer 3>;
     };
 
     kscan0: kscan {
@@ -106,15 +103,17 @@
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
 
-    trackball: trackball@0 {
+trackball: trackball@0 {
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
-        zephyr,axis-x = <INPUT_REL_X>;
-        zephyr,axis-y = <INPUT_REL_Y>;
-        
-        res-cpi = <1200>;
+        /* リスナーではなく、センサーノード側でレイヤー発動を指定するパターン */
+        /* もしこれでもエラーが出る場合は、一旦ここも削除して手動レイヤーを推奨します */
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+        res-cpi = <1600>;
     };
 };
