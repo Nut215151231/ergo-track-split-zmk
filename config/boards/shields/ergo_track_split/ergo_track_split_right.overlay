@@ -97,21 +97,20 @@
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
 
-    /* 3-wire SPI (SDIO) 有効化 */
-    sdio-mode;
+    /* ここにあった sdio-mode; を削除 */
 
     trackball: trackball@0 {
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        /* MOTIONピンの設定 */
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
-        /* 軸の設定 */
+        /* センサー側のプロパティとして記述 */
+        sdio-mode; 
+        
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
         
-        /* 解像度と方向の調整 */
         res-cpi = <600>;
         invert-x;
         invert-y;
