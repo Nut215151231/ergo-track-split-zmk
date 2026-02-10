@@ -96,7 +96,7 @@
             // Row 1
             &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
             // Row 2
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
+            &trans &kp LCTRL &kp LGUI &trans &mkp LCLK &mkp RCLK &mkp MCLK  &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans &trans
             // Row 3 (12 elements): Shiftキーは残す
                    &kp LSHFT &trans &trans &trans &trans &trans        &mkp MCLK  &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans 
             // Row 4: マウスボタン
