@@ -11,5 +11,5 @@ manifest:
       import: app/west.yml
     - name: zmk-auto-layer
       remote: dxue
-      # ブランチ名ではなく、特定のコミットを指定して安定させます
-      revision: d32766f65839b66c40689e472251a37c093a129f 
+      revision: main
+      path: modules/zmk-auto-layer  # 明示的にパスを指定して場所を確保
