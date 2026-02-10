@@ -102,8 +102,31 @@
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
         
-        res-cpi = <600>;
+        res-cpi = <1600>;
      //   invert-x;
      //   invert-y;
     };
+
+    / {
+    /* タイムアウト（オートレイヤー解除）の定義 */
+    behaviors {
+        auto_mouse_layer: auto_mouse_layer {
+            compatible = "zmk,behavior-auto-layer";
+            #binding-cells = <1>;
+            continue-list = <MOUSE_BTN1 MOUSE_BTN2 MOUSE_BTN3>; // マウスボタンを押している間は維持
+            timeout-ms = <1000>; // 1秒間動かさないとマウスレイヤーを抜ける
+        };
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        input-processors = <&zip_xy_scaler 1 1>;
+        
+        /* トラックボールを動かした時の挙動 */
+        /* MOUSEレイヤー（3番）を自動で呼び出す */
+        layers = <0>; // 全レイヤーで有効
+        bindings = <&auto_mouse_layer 3>; 
+    };
+};
 };
