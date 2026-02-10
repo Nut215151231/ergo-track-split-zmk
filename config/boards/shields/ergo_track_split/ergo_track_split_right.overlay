@@ -13,6 +13,9 @@
 };
 
 / {
+    /* * LISTENERは通常Central(左手)側で動作させますが、
+     * 右手単体テスト時などのために定義を残す場合は、deviceの参照が正しいことを確認します。
+     */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>; 
@@ -94,15 +97,21 @@
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
 
+    /* 3-wire SPI (SDIO) 有効化 */
+    sdio-mode;
+
     trackball: trackball@0 {
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
+        /* MOTIONピンの設定 */
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
+        /* 軸の設定 */
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
         
+        /* 解像度と方向の調整 */
         res-cpi = <600>;
         invert-x;
         invert-y;
