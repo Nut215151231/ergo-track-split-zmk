@@ -47,14 +47,14 @@
         status = "okay";
     };
 
-    // Encoder 2 - P0.24競合のため無効化
+    // Encoder 2 
     // Right側のMOTION pinと競合
     left_encoder_2: encoder_left_2 {
         compatible = "alps,ec11";
         a-gpios = <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
-        status = "disabled";  // 無効化
+        status = "okay";
     };
 
     // Encoder 1のみ使用
