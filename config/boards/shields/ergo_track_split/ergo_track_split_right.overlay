@@ -16,15 +16,17 @@
         am_layer: am_layer {
             compatible = "zmk,behavior-auto-layer";
             #binding-cells = <1>;
-            continue-list = <0 1 2>; // LCLK, RCLK, MCLK
+            continue-list = <0 1 2>; // LCLK, RCLK, MCLK の内部コード
             timeout-ms = <1000>;
         };
     };
 
+    /* トラックボールの動きを監視して am_layer をトリガーする */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_scaler 1 1>;
+        /* この zmk,input-processor-entry を使うのが最新の正攻法です */
+        input-processors = <&zip_xy_scaler 1 1>, <&am_layer 3>;
     };
 
     kscan0: kscan {
@@ -108,15 +110,9 @@
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
-        /* 必須項目をしっかり含める */
+        /* 必須項目のみを残す */
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
-        
-        /* オートマウスのトリガー指定（ドライバ対応形式） */
-        /* もしここでエラーが出るなら、この3行を消せばビルドは必ず通ります */
-        evt-type = <INPUT_EV_REL>;
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
         
         res-cpi = <1600>;
     };
