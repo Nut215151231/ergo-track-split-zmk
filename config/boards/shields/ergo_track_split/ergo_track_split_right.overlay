@@ -4,6 +4,8 @@
  */
 
 #include "ergo_track_split.dtsi"
+/* ZIP(ZMK Input Processors)を読み込む */
+#include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
@@ -11,24 +13,14 @@
 };
 
 / {
-    behaviors {
-        /* オートマウスレイヤーの設定 */
-        /* マウスキー（0,1,2 = LCLK,RCLK,MCLK）を押すとタイマーをリセットし留まる */
-        am_layer: am_layer {
-            compatible = "zmk,behavior-auto-layer";
-            #binding-cells = <1>;
-            continue-list = <0 1 2>; 
-            timeout-ms = <1000>; // 1秒操作がないとレイヤーを抜ける
-        };
-    };
-
-    /* トラックボールの動きを監視して自動でレイヤー3を起動 */
+    /* トラックボールのリスナー設定 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = 
-            <&zip_xy_scaler 1 1>, 
-            <&am_layer 3>; // マウスが動いたらレイヤー3へ
+        /* * zip_temp_layer <レイヤー番号 タイムアウト(ms)>
+         * ここではレイヤー3、タイムアウトは記事より短めの1000ms(1秒)に設定 
+         */
+        input-processors = <&zip_temp_layer 3 1000>;
     };
 
     kscan0: kscan {
@@ -111,10 +103,19 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
         zephyr,axis-x = <INPUT_REL_X>;
         zephyr,axis-y = <INPUT_REL_Y>;
-
         res-cpi = <1600>;
     };
+};
+
+/* * マウスレイヤーから「勝手に抜けない」ための除外キー設定 
+ * ここに指定した番号のキーを押しても、オートマウスレイヤーは解除されません。
+ * 右手側のマウスクリック等に使うキーの位置を指定してください。
+ */
+&zip_temp_layer {
+    excluded-positions = < 36
+        /* ここにご自身のキーボードのキー番号を指定 */
+        /* 例: 36 37 38 */
+    >;
 };
