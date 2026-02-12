@@ -108,7 +108,7 @@
             >;
 
             /* Encoder: BT device */
-            sensor-bindings = <&right_encoder &inc_dec_kp BT_NXT BT_PRV>;
+            sensor-bindings = <&right_encoder &inc_dec_kp BT_NXT>, <&right_encoder &inc_dec_kp BT_PRV>;
         };
     };
 };
