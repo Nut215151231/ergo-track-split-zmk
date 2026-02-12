@@ -6,8 +6,9 @@
 #include "ergo_track_split.dtsi"
 
 / {
+    /* USB CDC ACM for ZMK Studio */
     chosen {
-        zmk,battery = &vbatt;
+        zmk,studio-rpc-uart = &cdc_acm_uart;
     };
 
     kscan0: kscan {
@@ -58,5 +59,11 @@
             gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
             label = "FUNC_LED_LEFT";
         };
+    };
+};
+/* USB CDC ACM for ZMK Studio RPC */
+&zephyr_udc0 {
+    cdc_acm_uart: cdc_acm_uart {
+        compatible = "zephyr,cdc-acm-uart";
     };
 };
