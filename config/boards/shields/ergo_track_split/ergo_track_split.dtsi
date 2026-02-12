@@ -58,22 +58,9 @@
         gpios = <&gpio1 13 GPIO_ACTIVE_HIGH>;  /* P1.13 */
     };
 
-    pin-controller {
-        uart0_default: uart0_default {
-            #sensor-binding-cells = <0>;
-            status = "okay";
-        };
-    };
+
     // ...existing code...
 };
-
-
-    pin-controller {
-        uart0_default: uart0_default {
-            #sensor-binding-cells = <0>;
-            status = "okay";
-        };
-    };
 
 &adc {
     status = "okay";
