@@ -50,6 +50,8 @@
             // Row 5
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp SPACE &kp SPACE  &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
+            // Encoder bindings: Encoder1(Vol), Encoder2(PageUD), Encoder3(Right)
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         // ==================== LOWER LAYER ====================
@@ -68,6 +70,8 @@
             // Row 5
             &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
             >;
+            // Encoder bindings
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
         // ==================== RAISE LAYER ====================
@@ -86,6 +90,8 @@
             // Row 5
             &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
             >;
+            // Encoder bindings
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp UP DOWN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         // ==================== MOUSE LAYER ====================
@@ -104,6 +110,8 @@
             // Row 5
             &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
             >;
+            // Encoder bindings: Mouse wheel
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN &inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
         // ==================== FUNCTION LAYER ====================
@@ -122,6 +130,8 @@
             // Row 5: BTナビゲーション
             &trans &bt BT_PRV &trans &trans &bt BT_NXT &trans &trans     &trans &trans &trans &trans &trans &trans &trans
             >;
+            // Encoder bindings: BT device selection
+            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV &inc_dec_kp BT_NXT BT_PRV &inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
