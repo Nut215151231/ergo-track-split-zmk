@@ -14,14 +14,6 @@
         zmk,studio-rpc-uart = &cdc_acm_uart;
     };
 
-    /* トラックボールのリスナー設定（無効化）
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        input-processors = <&zip_temp_layer 3 1000>;
-    };
-    */
-
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -47,19 +39,17 @@
             ;
     };
 
-    right_encoder: encoder_right {
-        compatible = "alps,ec11";
-        a-gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <80>;
-        status = "okay";
-        #sensor-binding-cells = <0>;
-    };
+    /* ===== エンコーダ定義 ===== */
+    encoders {
+        compatible = "zmk,encoders";
 
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&right_encoder>;
-        triggers-per-rotation = <20>;
+        right_encoder: encoder_right {
+            compatible = "alps,ec11";
+            a-gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+            b-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+            steps = <80>;
+            status = "okay";
+        };
     };
 
     leds {
@@ -71,7 +61,15 @@
     };
 };
 
-/* トラックボール用SPI設定（無効化）
+/* ===== ZMK sensorsへ追加 ===== */
+&sensors {
+    sensors = <&right_encoder>;
+    triggers-per-rotation = <20>;
+};
+
+
+/* ===== トラックボールSPI設定（無効化のまま） ===== */
+/*
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -108,12 +106,6 @@
         zephyr,axis-y = <INPUT_REL_Y>;
         res-cpi = <1600>;
     };
-};
-*/
-
-/* マウスレイヤー設定（無効化）
-&zip_temp_layer {
-    excluded-positions = < 36 >;
 };
 */
 
