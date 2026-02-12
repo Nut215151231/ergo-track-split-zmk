@@ -46,7 +46,7 @@
             >;
 
             /* Encoder: Volume */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&right_encoder &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /* ==================== LOWER ==================== */
@@ -61,7 +61,7 @@
             >;
 
             /* Encoder: Brightness */
-            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
+            sensor-bindings = <&right_encoder &inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
         /* ==================== RAISE ==================== */
@@ -76,7 +76,7 @@
             >;
 
             /* Encoder: Page Up/Down */
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&right_encoder &inc_dec_kp PG_UP PG_DN>;
         };
 
         /* ==================== MOUSE ==================== */
@@ -91,7 +91,7 @@
             >;
 
             /* Encoder: Scroll */
-            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
+            sensor-bindings = <&right_encoder &inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
         /* ==================== FUNCTION ==================== */
@@ -109,7 +109,7 @@
             >;
 
             /* Encoder: BT device */
-            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>;
+            sensor-bindings = <&right_encoder &inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
