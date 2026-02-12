@@ -36,7 +36,6 @@
             ;
     };
 
-    /* ===== エンコーダ定義（新方式）===== */
     encoders {
         compatible = "zmk,encoders";
 
@@ -57,6 +56,13 @@
         };
     };
 
+    /*  sensorsは中に入れる */
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder_1>, <&left_encoder_2>;
+        triggers-per-rotation = <20>;
+    };
+
     leds {
         compatible = "gpio-leds";
         func_led: led_func {
@@ -65,13 +71,6 @@
         };
     };
 };
-
-/* ===== ZMK sensors に追加 ===== */
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&right_encoder>;
-        triggers-per-rotation = <20>;
-    };
 
 /* USB CDC ACM for ZMK Studio RPC */
 &zephyr_udc0 {

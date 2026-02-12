@@ -39,7 +39,6 @@
             ;
     };
 
-    /* ===== エンコーダ定義 ===== */
     encoders {
         compatible = "zmk,encoders";
 
@@ -52,6 +51,13 @@
         };
     };
 
+    /*  sensorsはここに入れる */
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
     leds {
         compatible = "gpio-leds";
         func_led: led_func {
@@ -60,55 +66,6 @@
         };
     };
 };
-
-/* ===== ZMK sensorsへ追加 ===== */
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&right_encoder>;
-        triggers-per-rotation = <20>;
-    };
-
-
-/* ===== トラックボールSPI設定（無効化のまま） ===== */
-/*
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 1)>,
-                    <NRF_PSEL(SPIM_MOSI, 1, 2)>,
-                    <NRF_PSEL(SPIM_MISO, 1, 2)>;
-        };
-    };
-
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 1)>,
-                    <NRF_PSEL(SPIM_MOSI, 1, 2)>,
-                    <NRF_PSEL(SPIM_MISO, 1, 2)>;
-            low-power-enable;
-        };
-    };
-};
-
-&spi0 {
-    compatible = "nordic,nrf-spim";
-    status = "disabled";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
-
-    trackball: trackball@0 {
-        compatible = "pixart,pmw3610";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        motion-gpios = <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        zephyr,axis-x = <INPUT_REL_X>;
-        zephyr,axis-y = <INPUT_REL_Y>;
-        res-cpi = <1600>;
-    };
-};
-*/
 
 /* USB CDC ACM for ZMK Studio RPC */
 &zephyr_udc0 {
