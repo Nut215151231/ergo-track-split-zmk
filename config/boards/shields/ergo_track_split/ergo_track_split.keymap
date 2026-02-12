@@ -15,12 +15,11 @@
 #define FUNC  4
 
 / {
-    /* Input processors for trackball */
-    zip_xy_scaler: zip_xy_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <2>;
-        type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X INPUT_REL_Y>;
+
+    /* ===== Encoder registration (ZMK 4.x) ===== */
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&right_encoder>;
     };
 
     conditional_layers {
@@ -34,104 +33,82 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // ==================== BASE LAYER ====================
+        /* ==================== BASE ==================== */
         base_layer {
             bindings = <
-            // Row 0: 右上に&to MOUSE
             &to MOUSE &kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &to MOUSE
-            // Row 1
-            &bt BT_CLR_ALL &kp TAB &kp Q &kp W &kp E &kp R &kp T               &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
-            // Row 2
-            &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G             &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &kp RET
-            // Row 3 (12 elements)
-                     &kp LSHFT &kp Z &kp X &kp C &kp V &kp B           &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
-            // Row 4: &to でレイヤー切り替え
+            &bt BT_CLR_ALL &kp TAB &kp Q &kp W &kp E &kp R &kp T    &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
+            &kp LALT &kp CAPS &kp A &kp S &kp D &kp F &kp G         &kp H &kp J &kp K &kp L &kp SEMI &kp APOS &kp RET
+                     &kp LSHFT &kp Z &kp X &kp C &kp V &kp B        &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
             &to RAISE &kp LCTRL &kp LGUI &to LOWER &kp SPACE &none &none    &kp SPACE &kp RET &none &none &kp DEL &kp DEL &none
-            // Row 5
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp SPACE &kp SPACE  &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
-            // Encoder bindings: Encoder1(Vol), Encoder2(PageUD), Encoder3(Right)
-            
+
+            /* Encoder: Volume */
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        // ==================== LOWER LAYER ====================
+        /* ==================== LOWER ==================== */
         lower_layer {
             bindings = <
-            // Row 0: 左上で&to BASEに戻る
-            &to BASE &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6          &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &trans
-            // Row 1: 数字と記号
-            &trans &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5         &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans &trans
-            // Row 2: 記号キー
+            &to BASE &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6      &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &trans
+            &trans &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &trans &trans
             &trans &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans &trans
-            // Row 3 (12 elements)
-                   &trans &trans &trans &trans &trans &trans           &trans &trans &trans &trans &trans &trans
-            // Row 4
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
-            // Row 5
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-            // Encoder bindings
-            
+
+            /* Encoder: Brightness */
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
-        // ==================== RAISE LAYER ====================
+        /* ==================== RAISE ==================== */
         raise_layer {
             bindings = <
-            // Row 0: 左上で&to BASEに戻る
-            &to BASE &trans &trans &trans &trans &trans &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 1: ナビゲーション
-            &trans &trans &kp HOME &kp UP &kp END &kp PG_UP &trans      &trans &trans &trans &trans &trans &trans &trans
-            // Row 2: 矢印キー
+            &to BASE &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &kp HOME &kp UP &kp END &kp PG_UP &trans  &trans &trans &trans &trans &trans &trans &trans
             &trans &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans  &trans &trans &trans &trans &trans &trans &trans
-            // Row 3 (12 elements)
-                   &trans &trans &trans &trans &trans &trans           &trans &trans &trans &trans &trans &trans
-            // Row 4
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
-            // Row 5
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-            // Encoder bindings
-           
+
+            /* Encoder: Page Up/Down */
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
 
-        // ==================== MOUSE LAYER ====================
+        /* ==================== MOUSE ==================== */
         mouse_layer {
             bindings = <
-            // Row 0: 左上で&to BASEに戻る
-            &to BASE &kp LCTRL &trans &trans &trans &trans &trans          &trans &trans &trans &trans &trans &trans &trans
-            // Row 1
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
-            // Row 2
-            &trans &trans &trans &trans &trans &trans &trans           &mkp LCLK &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans
-            // Row 3 (12 elements): Shiftキーは残す
-                   &kp LSHFT &trans &trans &trans &trans &trans        &mkp MCLK  &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans 
-            // Row 4: マウスボタン
+            &to BASE &kp LCTRL &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &mkp LCLK &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans
+                   &kp LSHFT &trans &trans &trans &trans &trans     &mkp MCLK &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans
             &trans &kp LCTRL &kp LGUI &trans &mkp LCLK &mkp RCLK &mkp MCLK  &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans &trans
-            // Row 5
-            &trans &trans &trans &trans &trans &trans &trans            &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-            // Encoder bindings: Mouse wheel
-            
+
+            /* Encoder: Scroll */
+            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
-        // ==================== FUNCTION LAYER ====================
+        /* ==================== FUNCTION ==================== */
         function_layer {
             bindings = <
-            // Row 0: BT設定とbootloader
-            &bt BT_CLR_ALL &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG  &trans &trans &trans &trans &trans &trans &bootloader
-            // Row 1: 出力切り替え
-            &out OUT_BLE &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-            // Row 2
-            &out OUT_USB &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-            // Row 3 (12 elements)
-                        &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans
-            // Row 4
-            &trans &trans &trans &trans &trans &trans &trans             &trans &trans &trans &trans &trans &trans &trans
-            // Row 5: BTナビゲーション
-            &trans &bt BT_PRV &trans &trans &bt BT_NXT &trans &trans     &trans &trans &trans &trans &trans &trans &trans
+            &bt BT_CLR_ALL &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_TOG
+            &trans &trans &trans &trans &trans &trans &bootloader
+            &out OUT_BLE &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans
+            &out OUT_USB &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans
+            &trans &bt BT_PRV &trans &trans &bt BT_NXT &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans
             >;
-            // Encoder bindings: BT device selection
-            
+
+            /* Encoder: BT device */
+            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
