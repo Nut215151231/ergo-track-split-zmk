@@ -2,12 +2,6 @@
     #sensor-binding-cells = <0>;
 };
 
-&soc {
-    interrupt_controller@e000e100 {
-        #sensor-binding-cells = <0>;
-    };
-};
-
 /*
  * Copyright (c) 2024
  * SPDX-License-Identifier: MIT
