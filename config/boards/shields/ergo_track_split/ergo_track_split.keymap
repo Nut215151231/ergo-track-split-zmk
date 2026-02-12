@@ -38,8 +38,8 @@
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp SPACE &kp SPACE  &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
 
-            /* Encoder: Volume, Brightness, Scroll */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_BRI_UP C_BRI_DN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
+            /* Encoder */
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /* ==================== LOWER ==================== */
@@ -53,8 +53,8 @@
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
 
-            /* Encoder: Page, Home/End, Arrows */
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>, <&inc_dec_kp HOME END>, <&inc_dec_kp LEFT RIGHT>;
+            /* Encoder */
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
 
         /* ==================== RAISE ==================== */
@@ -68,8 +68,8 @@
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
 
-            /* Encoder: Arrows, Arrows, Volume */
-            sensor-bindings = <&inc_dec_kp UP DOWN>, <&inc_dec_kp LEFT RIGHT>, <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            /* Encoder */
+            sensor-bindings = <&inc_dec_kp UP DOWN>;
         };
 
         /* ==================== MOUSE ==================== */
@@ -83,8 +83,8 @@
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
 
-            /* Encoder: Scroll, Scroll, Scroll */
-            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
+            /* Encoder */
+            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
         /* ==================== FUNCTION ==================== */
@@ -101,8 +101,8 @@
             &trans &trans &trans &trans &trans &trans &trans
             >;
 
-            /* Encoder: BT_NXT, BT_PRV, OUT_TOG */
-            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>, <&inc_dec_kp BT_PRV BT_NXT>, <&inc_dec_kp OUT_USB OUT_BLE>;
+            /* Encoder */
+            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
