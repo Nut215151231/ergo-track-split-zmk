@@ -60,12 +60,13 @@
     // ...existing code...
 };
 
-/pin-controller {
-    uart0_default: uart0_default {
-        #sensor-binding-cells = <0>;
-        status = "okay";
+
+    pin-controller {
+        uart0_default: uart0_default {
+            #sensor-binding-cells = <0>;
+            status = "okay";
+        };
     };
-};
 
 &adc {
     status = "okay";
