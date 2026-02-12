@@ -16,12 +16,6 @@
 
 / {
 
-    /* ===== Encoder registration (ZMK 4.x) ===== */
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&right_encoder>;
-    };
-
     conditional_layers {
         compatible = "zmk,conditional-layers";
         func_layer {
