@@ -13,6 +13,11 @@
 };
 
 / {
+    /* USB CDC ACM for ZMK Studio */
+    chosen {
+        zmk,studio-rpc-uart = &cdc_acm_uart;
+    };
+
     /* トラックボールのリスナー設定 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
@@ -119,3 +124,10 @@
         /* 例: 36 37 38 */
     >;
 };
+
+/* USB CDC ACM for ZMK Studio RPC */
+&zephyr_udc0 {
+    cdc_acm_uart: cdc_acm_uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+}
