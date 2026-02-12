@@ -45,6 +45,7 @@
         b-gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;   // ENC1.B
         steps = <80>;
         status = "okay";
+        #sensor-binding-cells = <0>;
     };
 
     // Encoder 2 (左手側)
@@ -54,6 +55,7 @@
         b-gpios = <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // ENC2.B = P0.24
         steps = <80>;
         status = "okay";
+        #sensor-binding-cells = <0>;
     };
 
     sensors: sensors {

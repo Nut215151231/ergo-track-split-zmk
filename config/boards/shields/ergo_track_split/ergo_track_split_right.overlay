@@ -4,9 +4,6 @@
  */
 
 #include "ergo_track_split.dtsi"
-/* ZIP(ZMK Input Processors)を読み込む */
-#include <input/processors.dtsi>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
     col-offset = <7>;
@@ -17,15 +14,13 @@
         zmk,studio-rpc-uart = &cdc_acm_uart;
     };
 
-    /* トラックボールのリスナー設定 */
+    /* トラックボールのリスナー設定（無効化）
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* * zip_temp_layer <レイヤー番号 タイムアウト(ms)>
-         * ここではレイヤー3、タイムアウトは記事より短めの1000ms(1秒)に設定 
-         */
         input-processors = <&zip_temp_layer 3 1000>;
     };
+    */
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
@@ -58,6 +53,7 @@
         b-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
         status = "okay";
+        #sensor-binding-cells = <0>;
     };
 
     sensors: sensors {
@@ -75,6 +71,7 @@
     };
 };
 
+/* トラックボール用SPI設定（無効化）
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -96,7 +93,7 @@
 
 &spi0 {
     compatible = "nordic,nrf-spim";
-    status = "okay";
+    status = "disabled";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
@@ -112,17 +109,13 @@
         res-cpi = <1600>;
     };
 };
+*/
 
-/* * マウスレイヤーから「勝手に抜けない」ための除外キー設定 
- * ここに指定した番号のキーを押しても、オートマウスレイヤーは解除されません。
- * 右手側のマウスクリック等に使うキーの位置を指定してください。
- */
+/* マウスレイヤー設定（無効化）
 &zip_temp_layer {
-    excluded-positions = < 36
-        /* ここにご自身のキーボードのキー番号を指定 */
-        /* 例: 36 37 38 */
-    >;
+    excluded-positions = < 36 >;
 };
+*/
 
 /* USB CDC ACM for ZMK Studio RPC */
 &zephyr_udc0 {
