@@ -1,3 +1,7 @@
+&uart0_default {
+    #sensor-binding-cells = <0>;
+};
+
 /*
  * Copyright (c) 2024
  * SPDX-License-Identifier: MIT
