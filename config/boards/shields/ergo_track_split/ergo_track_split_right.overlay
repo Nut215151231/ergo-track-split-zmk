@@ -4,8 +4,6 @@
  */
 
 #include "ergo_track_split.dtsi"
-/* ZIP(ZMK Input Processors)を読み込む */
-#include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
@@ -17,7 +15,15 @@
         zmk,studio-rpc-uart = &cdc_acm_uart;
     };
 
-    /* Input processors for trackball */
+    /* Input processor: temp layer */
+    zip_temp_layer: zip_temp_layer {
+        compatible = "zmk,input-processor-temp-layer";
+        #input-processor-cells = <2>;
+        require-prior-idle-ms = <500>;
+        #sensor-binding-cells = <0>;
+    };
+
+    /* Input processor: scaler */
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
@@ -30,7 +36,6 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* zip_temp_layer <レイヤー番号 タイムアウト(ms)> */
         input-processors = <&zip_temp_layer 3 1000>;
     };
 
@@ -119,11 +124,6 @@
         zephyr,axis-y = <INPUT_REL_Y>;
         res-cpi = <1600>;
     };
-};
-
-/* マウスレイヤーから「勝手に抜けない」ための除外キー設定 */
-&zip_temp_layer {
-    excluded-positions = < 36 >;
 };
 
 /* USB CDC ACM for ZMK Studio RPC */
