@@ -49,9 +49,6 @@
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-
-            /* Encoder */
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>, <&inc_dec_kp PG_UP PG_DN>, <&inc_dec_kp UP DOWN>;
         };
 
         /* ==================== RAISE ==================== */
@@ -64,9 +61,6 @@
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-
-            /* Encoder */
-            sensor-bindings = <&inc_dec_kp UP DOWN>, <&inc_dec_kp UP DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
         /* ==================== MOUSE ==================== */
@@ -79,9 +73,6 @@
             &trans &kp LCTRL &kp LGUI &trans &mkp LCLK &mkp RCLK &mkp MCLK  &mkp LCLK &mkp RCLK &mkp MCLK &trans &trans &trans &trans
             &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans
             >;
-
-            /* Encoder */
-            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp BT_NXT BT_PRV>;
         };
 
         /* ==================== FUNCTION ==================== */
