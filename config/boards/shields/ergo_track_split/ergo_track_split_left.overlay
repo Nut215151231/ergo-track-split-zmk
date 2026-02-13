@@ -79,3 +79,8 @@
         compatible = "zephyr,cdc-acm-uart";
     };
 };
+
+/* 左側にはトラックボールがないのでSPI0を無効化 */
+&spi0 {
+    status = "disabled";
+};
