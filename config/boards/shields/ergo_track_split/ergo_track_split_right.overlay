@@ -17,6 +17,14 @@
         zmk,studio-rpc-uart = &cdc_acm_uart;
     };
 
+    /* Input processors for trackball */
+    zip_xy_scaler: zip_xy_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
+    };
+
     /* トラックボールのリスナー設定 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
