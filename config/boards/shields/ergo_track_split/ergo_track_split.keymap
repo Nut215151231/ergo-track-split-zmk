@@ -39,7 +39,7 @@
             >;
 
             /* Encoder */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp PG_UP PG_DN>;
         };
 
         /* ==================== LOWER ==================== */
@@ -54,7 +54,7 @@
             >;
 
             /* Encoder */
-            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>, <&inc_dec_kp PG_UP PG_DN>, <&inc_dec_kp UP DOWN>;
         };
 
         /* ==================== RAISE ==================== */
@@ -69,7 +69,7 @@
             >;
 
             /* Encoder */
-            sensor-bindings = <&inc_dec_kp UP DOWN>;
+            sensor-bindings = <&inc_dec_kp UP DOWN>, <&inc_dec_kp UP DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
         };
 
         /* ==================== MOUSE ==================== */
@@ -84,7 +84,7 @@
             >;
 
             /* Encoder */
-            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>, <&inc_dec_kp BT_NXT BT_PRV>;
         };
 
         /* ==================== FUNCTION ==================== */
@@ -102,7 +102,7 @@
             >;
 
             /* Encoder */
-            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>;
+            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>, <&inc_dec_kp BT_NXT BT_PRV>, <&inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
