@@ -37,9 +37,6 @@
             &to RAISE &kp LCTRL &kp LGUI &to LOWER &kp SPACE &none &none    &kp SPACE &kp RET &none &none &kp DEL &kp DEL &none
             &kp RET &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp SPACE &kp SPACE  &none &none &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp RET
             >;
-
-            /* Encoder */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp PG_UP PG_DN>;
         };
 
         /* ==================== LOWER ==================== */
