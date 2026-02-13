@@ -21,6 +21,7 @@
         func_layer {
             if-layers = <LOWER RAISE>;
             then-layer = <FUNC>;
+            sensor-bindings = <>, <>, <>;
         };
     };
 
