@@ -18,6 +18,7 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
+        sensor-bindings = <>, <>, <>;
         func_layer {
             if-layers = <LOWER RAISE>;
             then-layer = <FUNC>;
