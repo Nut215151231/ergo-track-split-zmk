@@ -88,9 +88,6 @@
             &trans &bt BT_PRV &trans &trans &bt BT_NXT &trans &trans
             &trans &trans &trans &trans &trans &trans &trans
             >;
-
-            /* Encoder */
-            sensor-bindings = <&inc_dec_kp BT_NXT BT_PRV>, <&inc_dec_kp BT_NXT BT_PRV>, <&inc_dec_kp BT_NXT BT_PRV>;
         };
     };
 };
