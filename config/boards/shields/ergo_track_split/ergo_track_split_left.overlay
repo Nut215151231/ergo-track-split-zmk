@@ -82,3 +82,9 @@
         compatible = "zephyr,cdc-acm-uart";
     };
 };
+
+/* SPI for trackball */
+&spi0 {
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
+};
